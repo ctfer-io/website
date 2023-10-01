@@ -1,4 +1,4 @@
-module github.com/ctfer-io/quickstart
+module github.com/ctfer-io/website
 
 go 1.20
 

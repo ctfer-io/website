@@ -1,6 +1,7 @@
 node_modules/*
 themes/*
 resources/*
-package-lock.json
+# package-lock.json
 .hugo_build.lock
 
+public/*
