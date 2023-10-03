@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Github actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  
+  # Website
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "pandatix"
+      - "NicoFgrx"

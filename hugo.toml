@@ -2,7 +2,6 @@ baseURL = 'https://docs.ctfer.io/'
 languageCode = 'en-us'
 title = 'CTFer Docs'
 
-
 [module]
 proxy = "direct"
 
