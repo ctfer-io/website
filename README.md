@@ -1,7 +1,7 @@
 <div align="center">
     <h1>CTFer Docs</h1>
 	<a href=""><img src="https://img.shields.io/github/license/ctfer-io/website?style=for-the-badge" alt="License"></a>
-    <a href="https://ctfer.io"><img src="https://img.shields.io/badge/website-blue?style=for-the-badge" alt="Documentation URL">
+    <a href="https://ctfer.io"><img src="https://img.shields.io/badge/website-blue?style=for-the-badge" alt="Documentation URL"></a>
 </div>
 
 This repository contains the CTFer.io documentation.
