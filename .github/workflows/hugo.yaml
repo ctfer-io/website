@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - "v*"
+  schedule:
+    - cron: '0 0 * * *' # once a day
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
