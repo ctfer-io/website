@@ -20,6 +20,8 @@ enableGitInfo: true
 taxonomies:
   tag: tags
   category: categories
+
+timeout: "60s"
   
 params:
   taxonomy:
