@@ -58,8 +58,8 @@ params:
     footer_about_enable: true
     navbar_logo: true
     navbar_translucent_over_cover_disable: false
-    sidebar_menu_compact: false
     sidebar_search_disable: true
+    sidebar_menu_foldable: true
     feedback:
       enable: true
       yes: Glad to hear it! Please <a
@@ -116,14 +116,18 @@ outputs:
     - print
     - RSS
 module:
-  # replacements: github.com/ctfer-io/ctfer-l3 -> /home/nicolas/5AS10/ctfer-l3
+  replacements: github.com/ctfer-io/chall-manager -> ../modules/chall-manager # protips: relative from ./themes
   hugoVersion:
     extended: true
-    min: 0.110.0
+    min: 0.140.0
   imports:
     - path: github.com/google/docsy
       disable: false
-    # - path: github.com/ctfer-io/ctfer-l3
-    #   mounts:
-    #   - source: webdocs
-    #     target: content/docs/ctfer-l3
+    - path: github.com/ctfer-io/chall-manager
+      mounts:
+      - source: webdocs
+        target: content/docs/chall-manager
+    - path: github.com/ctfer-io/ctfd-chall-manager
+      mounts:
+      - source: webdocs
+        target: content/docs/ctfd-chall-manager
