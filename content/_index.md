@@ -8,9 +8,6 @@ title: CTFer.io
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/ctfer-io/">
   Link to Org  <i class="fab fa-github ms-2 "></i>
 </a>
-<a class="btn btn-lg btn-primary me-3 mb-4" href="https://alpha.ctfer.io/docs">
-  Alpha Docs <i class="fa-solid fa-hammer"></i>
-</a>
 <p class="lead mt-5">Currently work in progress, follow us on GitHub for announcements </p>
 {{< blocks/link-down color="info" >}}
 {{< /blocks/cover >}}
