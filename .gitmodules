@@ -4,3 +4,4 @@
 [submodule "modules/chall-manager"]
 	path = modules/chall-manager
 	url = https://github.com/ctfer-io/chall-manager
+	branch = main
