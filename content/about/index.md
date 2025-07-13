@@ -1,17 +1,6 @@
 ---
 title: About Us
-linkTitle: About
-menu:
-  main:
-    weight: 10
-    pre: <i class='fa-solid fa-question'></i>
 ---
-
-{{% blocks/cover title="About Us" height="auto" %}}
-
-CTFer.io is a **Free**, **Open-Source**, and **Community-driven** effort<br>to bring the cybersecurity efforts of teaching, training and competitions further.
-
-{{% /blocks/cover %}}
 
 {{% blocks/section %}}
 ## Why ?

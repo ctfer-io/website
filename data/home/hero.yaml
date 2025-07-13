@@ -1,0 +1,13 @@
+enable: true
+
+title: "Focus on your CTF, **not the infrastructure**"
+text: "CTFer.io is a **Free**, **Open-Source**, and **Community-driven** effort to bring the cybersecurity efforts of teaching, training and competitions further."
+
+buttons:
+  - label: "About"
+    url: "/about"
+
+  - label: "GitHub"
+    url: "https://github.com/ctfer-io/"
+
+image: "images/hero-image.png"
