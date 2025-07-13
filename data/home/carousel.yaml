@@ -1,0 +1,6 @@
+enable: false # disabled for the moment (logo usage permission)
+
+title: "We have already accompanied several events"
+items:
+  - "images/logo.png"
+
