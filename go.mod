@@ -1,8 +1,10 @@
 module github.com/ctfer-io/website
 
-go 1.23.2
+go 1.24.1
+
+toolchain go1.24.5
 
 require (
-	github.com/ctfer-io/ctfd-chall-manager v0.3.4 // indirect
+	github.com/ctfer-io/chall-manager v0.5.0 // indirect
 	github.com/google/docsy v0.12.0 // indirect
 )

@@ -31,6 +31,9 @@
 {{ $srcset = delimit $srcset ", " }}
 
 {{/* Return the img element: */}}
+{{ if .link }}
+{{ with .link }}<a href="{{ . }}">{{end}}
+{{ end}}
 <img
   {{ with $resource.Permalink }}src="{{ . }}"{{ end }}
   {{ with $resource.Width }}width="{{ . }}"{{ end }}
@@ -40,3 +43,6 @@
   {{ with .class }}class="{{ . }}"{{ end }}
   alt="{{ . }}"
 />
+{{ if .link }}
+{{ with .link }}</a>{{end}}
+{{ end}}

@@ -6,7 +6,7 @@ text: |
   Under these, every contribution we work on is first developed and tested internally, then publicly released under Apache-2.0 License.
   Individuals, agencies and companies are invited to adopt them and contribute back !
 cards:
-  - image: "images/services-web-development.png"
+  - image: "images/iac.png"
     title: "Infrastructure as Code"
     text: "We believe in the power of automation and scalability. By treating infrastructure as code, we ensure consistency, reduce human error, and enable rapid deployment. This approach allows us to build robust and reliable systems that can adapt to the ever-changing landscape of cybersecurity."
 
@@ -17,6 +17,6 @@ cards:
       label: "Learn more"
       link: "/about"
 
-  - image: "images/services-web-development.png"
+  - image: "images/research-development.png"
     title: "Research & Development"
     text: "Innovation is at the heart of what we do. Through continuous research and development, we stay ahead of the curve, exploring new technologies and methodologies. This commitment to R&D ensures that we provide our users with the most advanced and effective solutions in the field of cybersecurity."
