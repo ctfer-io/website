@@ -4,7 +4,7 @@ markup:
       unsafe: true
 
 module:
-  replacements: github.com/ctfer-io/chall-manager -> ../modules/chall-manager # protips: relative from ./themes
+  ## replacements: github.com/ctfer-io/chall-manager -> ../modules/chall-manager,github.com/ctfer-io/ctfd-chall-manager -> ../../CTFd/CTFd/plugins/ctfd-chall-manager # protips: relative from ./themes
   hugoVersion:
     extended: true
     min: 0.146.0 # docsy v0.12.0

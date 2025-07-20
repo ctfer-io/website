@@ -1,7 +1,7 @@
 enable: true
 
 title: "Focus on your CTF, **not the infrastructure**"
-text: "CTFer.io is a **Free**, **Open-Source**, and **Community-driven** effort to bring the cybersecurity efforts of teaching, training and competitions further."
+text: "CTFer.io is a **Free**, **Open-Source**, and **Community-driven** effort to bring the cybersecurity for teaching, training and competitions further."
 
 buttons:
   - label: "About"

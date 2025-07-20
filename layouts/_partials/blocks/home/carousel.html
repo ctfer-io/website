@@ -7,15 +7,10 @@
       <div class="flex flex-col flex-wrap items-center justify-around gap-8 xl:flex-row">
         {{ range .items }}
           <div class="">
-            {{ partial "utilities/image.html" (dict "src" . "class" "w-auto h-8") }}
+            {{ partial "utilities/image.html" (dict "src" .src "class" "w-auto h-12" "link" .link) }}
           </div>
         {{ end }}
       </div>
     {{ end }}
-    <!-- {{ with .content }}
-    <div class="flex flex-col flex-wrap items-center justify-around gap-8 xl:flex-row">
-      <h2 class="text-primary mb-16 text-center text-2xl font-semibold">{{ . }}</h2>
-    </div>      
-    {{ end }} -->
   </div>
 </section>

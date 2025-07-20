@@ -1,5 +1,5 @@
 node_modules/*
-themes/*
+
 resources/*
 # package-lock.json
 .hugo_build.lock
@@ -8,3 +8,5 @@ public/*
 public.zip
 *.tar
 hack
+
+assets/images/carousel* 
