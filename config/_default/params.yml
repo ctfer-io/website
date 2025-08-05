@@ -1,0 +1,39 @@
+# taxonomy:
+#   # set taxonomyCloud = [] to hide taxonomy clouds
+#   taxonomyCloud:
+#     - tags
+#     - categories
+#   # If used, must have same length as taxonomyCloud
+#   taxonomyCloudTitle:
+#     - Tag Cloud
+#     - Categories
+#   # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+#   taxonomyPageHeader:
+#     - tags
+#     - categories
+#   # Highlighting config
+#   pygmentsCodeFences: true
+#   pygmentsUseClasses: false
+#   # Use the new Chroma Go highlighter in Hugo.
+#   pygmentsUseClassic: false
+#   #pygmentsOptions: linenos=table
+#   # See https://help.farbox.com/pygments.html
+#   pygmentsStyle: tango
+
+copyright: The CTFer.io Authors
+
+location:
+  - "Rennes, France"
+
+
+contact:
+  - "ctfer-io@protonmail.com"
+
+
+ui:
+  navbar_logo: true
+  navbar_translucent_over_cover_disable: false
+  sidebar_search_disable: true
+  sidebar_menu_foldable: true
+  readingtime:
+    enable: true

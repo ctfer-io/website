@@ -1,0 +1,6 @@
+{{ define "main" }}
+  {{ with .Site.Data.home.hero }}{{ if .enable }}{{ partial "blocks/home/hero.html" . }}{{ end }}{{ end }}
+  {{ with .Site.Data.home.carousel }}{{ if .enable }}{{ partial "blocks/home/carousel.html" . }}{{ end }}{{ end }}
+  {{ with .Site.Data.home.values }}{{ if .enable }}{{ partial "blocks/home/values.html" . }}{{ end }}{{ end }}
+  {{ with .Site.Data.home.testimonials }}{{ if .enable }}{{ partial "blocks/home/testimonials.html" . }}{{ end }}{{ end }}
+{{ end }}

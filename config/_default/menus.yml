@@ -1,0 +1,39 @@
+main:
+  - name: "Home"
+    url: "/#hero"
+    weight: 10
+
+  # - name: "Blog"
+  #   url: "/blog"
+  #   weight: 20
+
+  - name: "About"
+    url: "/about"
+    weight: 30
+  
+  - name: "Docs"
+    url: "/docs"
+    weight: 40
+
+
+buttons:
+  - name: "Email us"
+    url: "mailto:ctfer-io@protonmail.com"
+    weight: 50
+
+footer:
+  - name: "Home"
+    url: "/#hero"
+    weight: 10
+
+  # - name: "Blog"
+  #   url: "/blog"
+  #   weight: 20
+
+  - name: "About"
+    url: "/about"
+    weight: 30
+  
+  - name: "Docs"
+    url: "/docs"
+    weight: 40

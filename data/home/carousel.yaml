@@ -1,0 +1,14 @@
+enable: true # disabled for the moment (logo usage permission)
+
+title: "Our solutions already be deployed in several events"
+items:
+  - src: "images/carousel-24hiut.png"
+    link: https://24hinfo.iut.fr/
+  - src: "images/carousel-grehack-2024.png"
+    link: https://grehack.fr/2024/
+  - src: "images/carousel-grehack-2025.png"
+    link: https://grehack.fr/
+  - src: "images/carousel-nobrackets-2024.png"
+    link: https://wiki.nobrackets.fr/
+  - src: "images/carousel-trojan-2025.png"
+    link: https://eshatrojan.nl/

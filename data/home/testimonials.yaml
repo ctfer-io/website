@@ -1,0 +1,18 @@
+enable: true
+
+title: "Testimonials"
+
+featured:
+  image: "images/testimonials-awards.png"
+  text: "Many thanks for your commitment in preparing the 24h INFO 2025. Your professionalism in the face of various challenges, as well as your enthusiasm, greatly contributed to the success of the event. For us, it was a wonderful experience!"
+  client: "Noura Faci, Director of DUT IT Departement, 24h IUT INFO 2025"
+
+items:
+  - text: "Thank you guys for all the help. We wouldn't have been able to create such a success without your help. Wish you all the best !"
+    client: "Anonymous, ICAISC 2025"
+
+  - text: "Without your contributions, we would never have been able to stage the event, especially for the hardware and software infrastructure. [...] Once again, nothing would have been possible without you."
+    client: "Jean-Philippe Farrugia, Director of DUT IT Departement, 24h IUT INFO 2023"
+
+  - text: Thank you so much for the project work and the great support from the CTFer.io team! The chall-manager project and its instances opened up a whole new level of challenges for our contest.
+    client: Teun Peters, WhiteHats TrojanCTF 2025

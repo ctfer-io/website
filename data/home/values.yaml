@@ -1,0 +1,22 @@
+enable: true
+
+title: "Our values"
+text: |
+  We carry values to pilot out efforts.
+  Under these, every contribution we work on is first developed and tested internally, then publicly released under Apache-2.0 License.
+  Individuals, agencies and companies are invited to adopt them and contribute back !
+cards:
+  - image: "images/iac.png"
+    title: "Infrastructure as Code"
+    text: "We believe in the power of automation and scalability. By treating infrastructure as code, we ensure consistency, reduce human error, and enable rapid deployment. This approach allows us to build robust and reliable systems that can adapt to the ever-changing landscape of cybersecurity."
+
+  - image: "images/services-web-development.png"
+    title: "Software Development"
+    text: "Our expertise in software development enables us to create cutting-edge tools and platforms tailored for cybersecurity professionals. We focus on delivering high-quality, user-friendly solutions that empower our users to tackle complex challenges with ease and efficiency."
+    button:
+      label: "Learn more"
+      link: "/about"
+
+  - image: "images/research-development.png"
+    title: "Research & Development"
+    text: "Innovation is at the heart of what we do. Through continuous research and development, we stay ahead of the curve, exploring new technologies and methodologies. This commitment to R&D ensures that we provide our users with the most advanced and effective solutions in the field of cybersecurity."
