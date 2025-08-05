@@ -30,7 +30,7 @@
           <div class="flex flex-col gap-4 p-12 xl:flex-row xl:gap-8">
             {{ $colors := (slice "bg-green-800/50" "bg-yellow-800/50" "bg-red-800/50" "bg-purple-800/50") }}
             <div class="{{ index $colors (mod $i 4) }} size-16 min-h-16 min-w-16 rounded-full"></div>
-            <p class="">“{{ .text }}” <span class="text-primary whitespace-nowrap font-bold">- {{ .client }}</span></p>
+            <p class="">“{{ .text }}” <br><span class="text-primary break-words font-bold">- {{ .client }}</span></p>
           </div>
         {{ end }}
       </div>
