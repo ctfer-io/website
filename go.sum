@@ -1,9 +1,9 @@
 github.com/FortAwesome/Font-Awesome v0.0.0-20241216213156-af620534bfc3 h1:/iluJkJiyTAdnqrw3Yi9rH2HNHhrrtCmj8VJe7I6o3w=
 github.com/FortAwesome/Font-Awesome v0.0.0-20241216213156-af620534bfc3/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
-github.com/ctfer-io/ctfd-chall-manager v0.4.0 h1:HrIY07r8HHq5xCiGobniXHsf6C136dZLA0+li2mkHbQ=
-github.com/ctfer-io/ctfd-chall-manager v0.4.0/go.mod h1:mUMMX0YLEtzkBQo4QK+EeJ5PJnaNjgNcV3s8fVZ/9+M=
 github.com/ctfer-io/ctfd-chall-manager v0.5.0 h1:9Zygrsd1s+Yp25gcIMsoYHqw5NxIsMdpF9GDh6UhJc0=
 github.com/ctfer-io/ctfd-chall-manager v0.5.0/go.mod h1:mUMMX0YLEtzkBQo4QK+EeJ5PJnaNjgNcV3s8fVZ/9+M=
+github.com/ctfer-io/ctfd-chall-manager v0.7.1 h1:EWnT7fm3hJ27T8ewyX1z/yJeAXv0CBl4qj6FWhxk3KI=
+github.com/ctfer-io/ctfd-chall-manager v0.7.1/go.mod h1:mUMMX0YLEtzkBQo4QK+EeJ5PJnaNjgNcV3s8fVZ/9+M=
 github.com/google/docsy v0.12.0 h1:CddZKL39YyJzawr8GTVaakvcUTCJRAAYdz7W0qfZ2P4=
 github.com/google/docsy v0.12.0/go.mod h1:1bioDqA493neyFesaTvQ9reV0V2vYy+xUAnlnz7+miM=
 github.com/twbs/bootstrap v5.3.6+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
