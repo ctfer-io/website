@@ -1,7 +1,7 @@
 ---
 author: NicoFgrx
 title: "Everything on Docker"
-date: "2025-07-25"
+date: "2025-10-15"
 # description: Step by step instructions to use Docker with Chall-Manager, for begginers.
 resources:
   - src: "**.png"
