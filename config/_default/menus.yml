@@ -3,9 +3,9 @@ main:
     url: "/#hero"
     weight: 10
 
-  # - name: "Blog"
-  #   url: "/blog"
-  #   weight: 20
+  - name: "Blog"
+    url: "/blog"
+    weight: 20
 
   - name: "About"
     url: "/about"
@@ -26,9 +26,9 @@ footer:
     url: "/#hero"
     weight: 10
 
-  # - name: "Blog"
-  #   url: "/blog"
-  #   weight: 20
+  - name: "Blog"
+    url: "/blog"
+    weight: 20
 
   - name: "About"
     url: "/about"

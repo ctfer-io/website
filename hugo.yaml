@@ -19,3 +19,8 @@ module:
       mounts:
       - source: webdocs
         target: content/docs/ctfd-chall-manager
+
+disableKinds:
+- taxonomy
+- term
+- rss
