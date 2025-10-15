@@ -8,7 +8,7 @@ resources:
   - src: "**gif"
 ---
 
-Since the early days at CTFer.io, we have always assumed a Kubernetes cluster as the foundation for deployment. This made orchestration simpler and shaped our solutions to run inside containers.
+Since the early days at CTFer.io, we have always assumed a Kubernetes cluster as the foundation for deployments. This made orchestration simpler and shaped our solutions to run inside containers.
 
 Moreover, we observed that most of the time, a challenge with infrastructure consisted of a single Docker image, exposed on a single port.
 Having a load of Docker container, continuously spinning up and down given on-demand usage, was coherent with the orchestrating capabilities of Kubernetes.
@@ -122,6 +122,9 @@ Let’s say you want to deploy the image `anssi/fcsc2023-pwn-robot:latest` from 
    - In **Advanced > Challenge configuration**, fill the form as below:
       - `hostname`: `192.168.56.11`
       - `docker_host`: `tcp://192.168.56.11:2375`
+      - `image`: `anssi/fcsc2023-pwn-robot:latest`
+      - `port`: `4000`
+      - `protocol_url`: `tcp`
 
 {{< imgproc challenge_advanced_2 Resize "900x" >}}
 Extract of challenge advanced configuration. 
