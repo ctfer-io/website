@@ -16,7 +16,7 @@ We even eased deployment by creating a simplistic recipe `kubernetes.ExposedMono
 
 Indeed, while we are comfortable with Kubernetes, that's not always the case for our users - mostly student teams or nonprofit volunteers organizing their first CTF, often from scratch.
 
-The goal of this article is to present an alternative to our original Kubernetes-based setup using only virtual machines and Docker. All code referenced here is available on GitHub, under an open-source license, and can be reused freely.
+The goal of this article is to present an alternative to our original Kubernetes-based setup using only virtual machines and Docker. All code referenced in this blog post is [available on GitHub](https://github.com/nicofgrx/ctferio-everything-on-docker), under an open-source license, and can be reused freely.
 
 ## What’s the Architecture?
 
