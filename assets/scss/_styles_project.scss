@@ -531,3 +531,38 @@ footer {
     }
   }
 }
+
+// Print.
+// On screen we centre the docs column (ctfer-container) and cap prose to a
+// readable measure. Ctrl+P on a normal page keeps the screen CSS, so those
+// constraints (plus Bootstrap's `col-md-9` grid track left behind by the hidden
+// `.d-print-none` sidebars) squeeze the content onto a narrow, off-centre strip
+// that wastes most of the sheet. Release all of it for print so the content
+// spans the full page width. (Docsy already hides the sidebars for us.)
+@media print {
+  // Drop the centred max-width envelope and side padding.
+  .td-main {
+    max-width: none !important;
+    padding-inline: 0 !important;
+  }
+
+  // Zero the row gutter so the hidden columns leave no track and `main` has no
+  // residual gutter padding to offset.
+  .td-main > .row {
+    --bs-gutter-x: 0 !important;
+  }
+
+  // Let `main` take the whole row regardless of col-md-9 / col-xl-8, and drop the
+  // ps-md-5 reading indent.
+  .td-main > .row > main {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-inline: 0 !important;
+  }
+
+  // Release the readability measure: every block that caps at var(--ctfer-measure)
+  // (prose, code, tables, cards, tabs) becomes max-width:none and fills the page.
+  .td-content {
+    --ctfer-measure: none;
+  }
+}
