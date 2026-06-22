@@ -1,0 +1,50 @@
+{{/*
+  Project override of Docsy's left navigation sidebar.
+
+  Rooted at the page's top-level section (.Section), reliable for our
+  module-mounted docs unlike Docsy's .FirstSection.
+
+  Renders a tree-style hierarchy. The connectors are drawn entirely in CSS
+  (see _styles_project.scss): each item carries a vertical + horizontal border
+  guide, so the lines stay continuous across wrapped titles and have no gaps.
+  Folders (entries with children) are collapsible via a CSS-only checkbox and
+  start collapsed, except along the active path.
+*/ -}}
+{{ $root := site.GetPage .Section -}}
+{{ with $root -}}
+<nav class="td-sidebar-nav ctfer-docnav" id="td-section-nav" aria-label="Documentation navigation">
+  <a class="ctfer-docnav__root{{ if eq . $ }} is-active{{ end }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  {{ template "ctfer-docnav-tree" (dict "section" . "page" $ "depth" 0) -}}
+</nav>
+{{ end -}}
+
+{{ define "ctfer-docnav-tree" -}}
+  {{ $p := .page -}}
+  {{ $depth := .depth -}}
+  {{ $children := (where (union .section.Sections .section.Pages) ".Params.toc_hide" "!=" true).ByWeight -}}
+  {{ with $children -}}
+  <ul class="ctfer-docnav__list">
+    {{ range . -}}
+      {{ $isCurrent := eq . $p -}}
+      {{ $onPath := or $isCurrent ($p.IsDescendant .) -}}
+      {{ $hasKids := gt (len (where (union .Sections .Pages) ".Params.toc_hide" "!=" true)) 0 -}}
+      {{ $linkClass := printf "ctfer-docnav__link%s%s" (cond $hasKids " is-folder" "") (cond $isCurrent " is-active" "") -}}
+      <li class="ctfer-docnav__item{{ if eq $depth 0 }} is-top{{ end }}">
+        {{ if $hasKids -}}
+          {{ $id := printf "cdn-%d-%s" $depth (anchorize .RelPermalink) -}}
+          <input class="ctfer-docnav__toggle" type="checkbox" id="{{ $id }}"{{ if $onPath }} checked{{ end }} />
+          <span class="ctfer-docnav__row">
+            <a class="{{ $linkClass }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            <label class="ctfer-docnav__caret" for="{{ $id }}" aria-hidden="true"></label>
+          </span>
+          {{ template "ctfer-docnav-tree" (dict "section" . "page" $p "depth" (add $depth 1)) -}}
+        {{ else -}}
+          <span class="ctfer-docnav__row">
+            <a class="{{ $linkClass }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          </span>
+        {{ end -}}
+      </li>
+    {{ end -}}
+  </ul>
+  {{ end -}}
+{{ end -}}

@@ -1,0 +1,32 @@
+{{/*
+  Project override of Docsy's head-end hook.
+  Docsy pages ship Bootstrap, not our Tailwind utilities, so the house
+  header/footer would be unstyled. Load a preflight-free Tailwind build
+  (utilities + theme only) plus fonts and the nav toggler.
+  No preflight = no global reset, so Docsy's own content styling is left
+  untouched.
+*/}}
+{{ with (templates.Defer (dict "key" "global-docs")) }}
+  {{ with resources.Get "css/docs.css" }}
+    {{ with resources.ExecuteAsTemplate "css/docs.css" $ . }}
+      {{ $opts := dict "inlineImports" true "optimize" true "minify" true }}
+      {{ with . | css.TailwindCSS $opts | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" />
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ with resources.Get "css/fonts.css" }}
+  {{ with resources.ExecuteAsTemplate "css/fonts.css" $ . }}
+    {{ $opts := dict "inlineImports" true "optimize" true "minify" true }}
+    {{ with . | css.TailwindCSS $opts | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" />
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ with resources.Get "js/main.js" }}
+  {{ $main := . | js.Build (dict "minify" "true") | fingerprint }}
+  <script src="{{ $main.RelPermalink }}" defer></script>
+{{ end }}

@@ -1,0 +1,24 @@
+// House theme for Docsy (docs/blog).
+// Imported before Bootstrap & Docsy defaults, so these win over their
+// `!default` values. Mirrors the Tailwind tokens in assets/css/styles.css
+// (single source of truth is a later cleanup).
+
+// --- Brand palette (the three core aspects) ---------------------------------
+$primary: #b43c2c;   // Research & Development
+$secondary: #ebb850; // Infra as Code
+$info: #479abf;      // Software Development
+
+// --- Typography -------------------------------------------------------------
+// Inter is injected on Docsy pages via layouts/_partials/hooks/head-end.html,
+// so we disable Docsy's Google Fonts fetch and point the stack at Inter.
+$td-enable-google-fonts: false;
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-family-base: $font-family-sans-serif;
+$headings-font-weight: 700;
+
+// --- Links: coloured, underline only on hover (matches the homepage) --------
+$link-color: $primary;
+$link-decoration: none;
+$link-hover-color: shade-color($primary, 15%);
+$link-hover-decoration: underline;
+ 

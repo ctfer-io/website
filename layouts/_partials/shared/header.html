@@ -1,50 +1,55 @@
-<nav class="">
-  <div class="container mx-auto flex items-center justify-between px-4 py-6 h-auto">
-    <a class="flex items-center" href="{{ .Site.BaseURL }}">
-      {{ partial "utilities/image.html" (dict "src" "images/logo.png" "class" "h-12 w-auto") }}
-    </a>
-    <button
-      class="cursor-pointer xl:hidden"
-      type="button"
-      data-toggle-target="#navbarContent"
-      data-toggle-class="-translate-y-full"
-      aria-label="Toggle Navigation"
-    >
-      {{ partial "heroicons/bars-4" }}
+{{/* Owns its own <header> landmark so the homepage and the Docsy docs layout
+     render the chrome from an identical structure (header > nav > .container).
+     The docs baseof override calls this directly, with no extra <header>. */}}
+<header>
+  <nav class="">
+    <div class="container mx-auto flex items-center justify-between px-4 py-6 h-auto">
+      <a class="flex items-center" href="{{ .Site.BaseURL }}">
+        {{ partial "utilities/image.html" (dict "src" "images/logo.png" "class" "h-12 w-auto") }}
+      </a>
+      <button
+        class="cursor-pointer xl:hidden"
+        type="button"
+        data-toggle-target="#navbarContent"
+        data-toggle-class="-translate-y-full"
+        aria-label="Toggle Navigation"
+      >
+        {{ partial "heroicons/bars-4" }}
 
-    </button>
-    <div
-      class="fixed inset-0 flex -translate-y-full flex-col items-center justify-center gap-8 bg-white duration-500 xl:relative xl:translate-y-0 xl:flex-row"
-      id="navbarContent"
-    >
-      <div class="container absolute top-0 mx-auto flex items-center justify-between px-4 py-6 xl:hidden">
-        <a class="flex items-center xl:hidden" href="{{ .Site.BaseURL }}">
-          {{ partial "utilities/image.html" (dict "src" "images/logo.png" "class" "h-12 w-auto") }}
-        </a>
-        <button
-          class="cursor-pointer xl:hidden"
-          type="button"
-          data-toggle-target="#navbarContent"
-          data-toggle-class="-translate-y-full"
-          aria-label="Toggle Navigation"
-        >
-          {{ partial "heroicons/x-mark" }}
-        </button>
+      </button>
+      <div
+        class="fixed inset-0 flex -translate-y-full flex-col items-center justify-center gap-8 bg-white duration-500 xl:relative xl:translate-y-0 xl:flex-row"
+        id="navbarContent"
+      >
+        <div class="container absolute top-0 mx-auto flex items-center justify-between px-4 py-6 xl:hidden">
+          <a class="flex items-center xl:hidden" href="{{ .Site.BaseURL }}">
+            {{ partial "utilities/image.html" (dict "src" "images/logo.png" "class" "h-12 w-auto") }}
+          </a>
+          <button
+            class="cursor-pointer xl:hidden"
+            type="button"
+            data-toggle-target="#navbarContent"
+            data-toggle-class="-translate-y-full"
+            aria-label="Toggle Navigation"
+          >
+            {{ partial "heroicons/x-mark" }}
+          </button>
+        </div>
+        <ul class="flex flex-col gap-8 xl:flex-row">
+          {{ range site.Menus.main }}
+            <li class="text-center">
+              <a class="text-primary" href="{{ .URL }}">{{ .Name }}</a>
+            </li>
+          {{ end }}
+        </ul>
+        <ul class="flex flex-col gap-8 xl:flex-row">
+          {{ range .Site.Menus.buttons }}
+            <li class="text-center">
+              {{ partial "components/button/primary" (dict "label" .Name "href" .URL ) }}
+            </li>
+          {{ end }}
+        </ul>
       </div>
-      <ul class="flex flex-col gap-8 xl:flex-row">
-        {{ range site.Menus.main }}
-          <li class="text-center">
-            <a class="text-primary" href="{{ .URL }}">{{ .Name }}</a>
-          </li>
-        {{ end }}
-      </ul>
-      <ul class="flex flex-col gap-8 xl:flex-row">
-        {{ range .Site.Menus.buttons }}
-          <li class="text-center">
-            {{ partial "components/button/primary" (dict "label" .Name "href" .URL ) }}
-          </li>
-        {{ end }}
-      </ul>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>

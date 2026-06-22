@@ -1,0 +1,568 @@
+// House layout & polish for Docsy (docs/blog).
+// Appended after all Docsy styles, so plain rules here win without !important.
+// Goal: a calm, content-forward docs surface in the brand palette, visually
+// consistent with the homepage.
+
+// Shared horizontal envelope. The homepage uses Tailwind's responsive
+// `.container`; on Docsy pages that same class resolves to Bootstrap's
+// (different) widths, so the header logo + menu land at a different x than on
+// the homepage. We re-declare the header container and the docs body envelope
+// with Tailwind's default container breakpoints, so the header lines up across
+// home and docs/blog and the docs content sits right under it.
+@mixin ctfer-container {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  // The chrome containers carry `px-4`. On the homepage that's Tailwind's
+  // px-4 (1rem). On Docsy pages Tailwind's px-4 isn't generated, so the class
+  // resolves to Bootstrap's `.px-4` utility, which is 1.5rem AND !important.
+  // We must match the homepage's 1rem, so we need !important to win the cascade.
+  padding-inline: 1rem !important;
+
+  @media (min-width: 40rem) {
+    max-width: 40rem;
+  }
+  @media (min-width: 48rem) {
+    max-width: 48rem;
+  }
+  @media (min-width: 64rem) {
+    max-width: 64rem;
+  }
+  @media (min-width: 80rem) {
+    max-width: 80rem;
+  }
+  @media (min-width: 96rem) {
+    max-width: 96rem;
+  }
+}
+
+// Match the header nav's container without depending on a <header> ancestor:
+// the header nav is the only nav on the page with a `.container` as a *direct*
+// child (Docsy's breadcrumb/TOC navs are not), so this is unambiguous. Keeping
+// the `>` avoids the nested `.container` inside the mobile overlay (#navbarContent).
+nav > .container,
+footer > .container {
+  @include ctfer-container;
+}
+
+// Constrain the docs *body* to the shared envelope so it lines up with the
+// header. NOT .td-outer: the footer is a direct child of .td-outer, so leaving
+// .td-outer full-width lets the footer background span the viewport edge-to-edge
+// like it does on the homepage.
+.td-main {
+  @include ctfer-container;
+  padding-top: 1.5rem;
+}
+
+.td-outer {
+  max-width: none;
+  padding-inline: 0;
+}
+
+// Chrome (header/footer) normalization.
+// The header and footer are Tailwind components that rely on Tailwind's
+// preflight reset, which we do NOT load on Docsy pages (it would reset Docsy's
+// content). So Bootstrap's reboot leaks into the chrome: <h*> get Bootstrap's
+// large sizes (beating Tailwind's text-lg), links get Bootstrap's colour, lists
+// regain bullets. Re-assert the homepage's intended baseline here.
+// (Sizes/weights mirror the partials' utilities: text-lg / font-bold / mb-2.)
+header nav,
+footer {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    margin: 0 0 0.5rem; // mb-2
+    font-size: 1.125rem; // text-lg
+    line-height: 1.75rem;
+    font-weight: 700; // font-bold
+  }
+
+  // Tailwind preflight (not loaded on Docsy pages) sets svg { display: block }.
+  // Bootstrap's reboot leaves svg inline (vertical-align: middle), which sits the
+  // footer's location pin on the text baseline and nudges it off its label's
+  // centre line. Match the homepage so the pin aligns.
+  svg {
+    display: block;
+  }
+}
+
+// Footer text + links: muted like the homepage, not Bootstrap's link colour.
+// (Headings keep the brand red via their `.text-primary` utility.)
+footer {
+  color: #0000009c; // mirrors the homepage's html { color }
+
+  // Bootstrap's .gap-3 (1rem) and .gap-4 (1.5rem) utilities are !important, so
+  // they override the footer's Tailwind gap-3 (0.75rem) / gap-4 (1rem) on Docsy
+  // pages (the same class of collision as .px-4).
+  // Re-assert the Tailwind values so the inter-element spacing matches the homepage.
+  .gap-3 {
+    gap: 0.75rem !important;
+  }
+  .gap-4 {
+    gap: 1rem !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// Footer desktop layout (Docsy / blog pages).
+// The shared footer is a Tailwind partial whose desktop layout comes from xl:
+// utilities (xl:text-start, xl:items-start, xl:flex-row). On Docsy pages the
+// chrome's Tailwind utilities are emitted as !important, so the base mobile
+// classes (text-center, items-center, flex-col) beat an ordinary override and
+// the footer stays in its centered mobile layout. Force the desktop layout with
+// !important so it wins, gated to xl (80rem = Tailwind's xl) so the narrow-screen
+// layout still matches the homepage's centred one. Scoped to .grid so the
+// copyright line below stays centred.
+@media (min-width: 80rem) {
+  footer .grid {
+    // Headings, description, list items + the location label: left-aligned.
+    :is(h2, p, li),
+    li > span {
+      text-align: left !important;
+    }
+
+    // Logo / description / social column: left-aligned (xl:items-start).
+    > div:first-child {
+      align-items: flex-start !important;
+    }
+
+    // Location row: pin beside its label (xl:flex-row). The gap comes from the
+    // .gap-4 rule above (1rem), matching the homepage no override needed here.
+    li.flex-col {
+      flex-direction: row !important;
+      align-items: center !important;
+    }
+  }
+}
+
+// Left sidebar.
+// Docsy offsets the sidebar by 4rem to clear its *fixed* navbar; ours is in
+// normal flow, so drop the offset and let it stick just below the header.
+.td-sidebar {
+  @include media-breakpoint-up(md) {
+    padding-top: 1.5rem;
+    border-right: 1px solid var(--bs-border-color);
+  }
+}
+
+.td-sidebar-nav {
+  @supports (position: sticky) {
+    position: sticky;
+    top: 1.5rem;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+  }
+}
+
+// Custom docs navigation tree (markup: layouts/_partials/sidebar.html).
+// `tree`-style hierarchy with CSS-drawn connectors (continuous across wrapped
+// titles, no gaps), CSS-only collapsible folders (collapsed unless on the
+// active path), top-level sections bolder/bigger.
+.ctfer-docnav {
+  font-size: 0.9rem;
+  --cdn-guide: var(--bs-border-color);
+  --cdn-indent: 1.25em;
+  --cdn-tick: 0.85em; // vertical offset of the horizontal connector
+
+  &__root {
+    display: block;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--bs-border-color);
+    color: var(--bs-emphasis-color);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+
+    &:hover,
+    &.is-active {
+      color: $primary;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    position: relative;
+    margin: 0;
+    padding-left: var(--cdn-indent);
+
+    // Vertical guide: spans the item's full height (incl. its children), so the
+    // line stays continuous however many lines a title wraps to.
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-left: 1px solid var(--cdn-guide);
+    }
+
+    // Horizontal connector at the first text line.
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: var(--cdn-tick);
+      width: 0.8em;
+      border-top: 1px solid var(--cdn-guide);
+    }
+
+    // Last sibling: vertical stops at the elbow.
+    &:last-child::before {
+      bottom: auto;
+      height: var(--cdn-tick);
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__link {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.15rem 0;
+    line-height: 1.4;
+    color: var(--bs-body-color);
+    text-decoration: none;
+
+    &:hover {
+      color: $primary;
+    }
+
+    &.is-folder {
+      font-weight: 600;
+      color: var(--bs-emphasis-color);
+    }
+
+    &.is-active {
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+
+  // Top-level sections: bolder and a touch larger.
+  &__item.is-top > .ctfer-docnav__row > .ctfer-docnav__link {
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+
+  // Collapse affordance.
+  &__caret {
+    flex: none;
+    width: 1.1em;
+    margin-left: 0.15rem;
+    padding: 0.15rem 0;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--bs-secondary-color);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.15s ease;
+
+    &::before {
+      content: "\25B8"; // right-pointing triangle
+      font-size: 0.7em;
+    }
+  }
+
+  // CSS-only collapse: hidden checkbox drives the child list + caret rotation.
+  &__toggle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  &__toggle:not(:checked) ~ &__list {
+    display: none;
+  }
+
+  &__toggle:checked ~ &__row .ctfer-docnav__caret {
+    transform: rotate(90deg);
+  }
+}
+
+// Right table of contents
+.td-sidebar-toc {
+  @supports (position: sticky) {
+    top: 1.5rem;
+    height: calc(100vh - 3rem);
+  }
+}
+
+#TableOfContents a.active,
+.td-toc a.active {
+  color: $primary;
+  font-weight: 600;
+}
+
+// Content column, constrain measure for readability.
+.td-content {
+  // The column is wide so figures/diagrams can use the space, but running prose
+  // shouldn't be that long to read. Cap text-level blocks to a readable measure
+  // (they sit left in the column); figures, diagrams, tables, code, and media are
+  // left uncapped so they fill the full width. Tune the measure here.
+  --ctfer-measure: 54rem;
+
+  > p:not(:has(img, svg, picture, video, iframe, .mermaid)),
+  > ul,
+  > ol,
+  > dl,
+  > blockquote,
+  > .alert,
+  > .lead,
+  > .highlight, // code blocks: share the text measure so they don't drift
+  > pre,        // (Docsy otherwise caps these at max-width:80%, ~off by a hair)
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    max-width: var(--ctfer-measure);
+  }
+
+  // Docsy caps its card panes and tabbed panes at max-width:80% too, so they
+  // drift off the shared measure. Pull them onto --ctfer-measure as well.
+  // (0,3,0) beats Docsy's (0,2,0) and loads later, so it wins.
+  .td-card-group.card-group,
+  .td-card.card,
+  > .tab-content .tab-pane {
+    max-width: var(--ctfer-measure);
+  }
+
+  > h1 {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  > h2 {
+    margin-top: 2.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .lead {
+    color: var(--bs-secondary-color);
+    font-size: 1.15rem;
+  }
+}
+
+// Tables.
+// Docsy @extends every markdown table into .table.table-striped.table-responsive
+// (+ display:block for horizontal scroll). Restyle into a cleaner, branded
+// table: top-aligned cells, a rust header band with light text, rust-tinted
+// zebra rows, and a slightly denser font so wide multi-column tables wrap less.
+//
+// IMPORTANT: Docsy @extends every table, so its rules compile to
+// `.td-content table:not(.td-initial) > ... > *` — the `:not(.td-initial)` is a
+// class, so Docsy's cell-background rule is (0,2,2) and beats a plain
+// `.td-content table ...`. We mirror that base selector (and add element depth)
+// so our header/zebra actually win.
+.td-content table:not(.td-initial) {
+  // Shrink-wrap to the actual columns so the card/border hugs small tables
+  // (Docsy forces display:block + width:100%), but cap at the shared text
+  // measure so wide tables stop at the same right edge as the prose instead of
+  // running past it. Below that, cells wrap / the block scrolls.
+  width: fit-content;
+  max-width: var(--ctfer-measure);
+  margin-block: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+
+  // Rounded card. The table is display:block + overflow-x:auto (Docsy's
+  // wrapper-less responsive), so border-radius clips the corners while
+  // horizontal scroll still works on small screens; a light outer border makes
+  // all four rounded corners read.
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+
+  // (0,2,3) beats Docsy's cell background (0,2,2).
+  thead th {
+    vertical-align: middle;
+    text-align: center;
+    background-color: #b43c2c; // brand rust (literal, like the alert colors)
+    color: #fff;
+    font-weight: 700;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+    padding: 0.55rem 0.8rem;
+  }
+
+  // Drop the last row's cell border so it doesn't double the rounded outer edge.
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  // Keep scheme strings like `s3://` from breaking mid-token.
+  th code,
+  td code {
+    white-space: nowrap;
+  }
+
+  // Rust zebra. Docsy's striped rule feeds --bs-table-bg-type from
+  // --bs-table-striped-bg at a specificity we can't undercut, so we set
+  // --bs-table-bg-type directly on the same odd-row cells (identical selector →
+  // source order decides, and _styles_project loads last, so we win).
+  > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-bg-type: #f3ddd9; // brand rust tint
+  }
+}
+
+// Use the horizontal space: the TOC column only needs room for short links, so
+// trim it and let the content column grow into the slack (the old 54rem cap and
+// the full col-xl-2 TOC left a wide gap on the right). xl only; smaller screens
+// keep Docsy's stacked/responsive layout.
+@include media-breakpoint-up(xl) {
+  .td-main > .row > .td-sidebar-toc {
+    flex: 0 0 auto;
+    width: 14rem;
+    max-width: 14rem;
+  }
+
+  .td-main > .row > main {
+    flex: 1 1 0%;
+    width: auto;
+    max-width: none;
+  }
+}
+
+// Section landing.
+// Turn the bare list into a responsive card grid so landing
+// pages (e.g. /docs) feel intentional rather than empty.
+.section-index {
+  hr.panel-line {
+    display: none;
+  }
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+
+  .entry {
+    // Anchor for the stretched link below: the whole card becomes clickable.
+    position: relative;
+    margin: 0;
+    padding: 1.25rem 1.4rem;
+    background: #fff;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.6rem;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      border-color 0.18s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: $primary;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+    }
+
+    h5 {
+      margin-bottom: 0.4rem;
+
+      a {
+        color: $primary;
+        font-weight: 700;
+        text-decoration: none;
+
+        // Stretch the title link to cover the entire card (no markup change).
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+      color: var(--bs-secondary-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Keep the box style (rounded, thick left rule), but restore Docsy's original
+// alert palette. The brand red/gold/blue is for the chrome only; our
+// $primary/$secondary/$info overrides had bled into .alert-primary (e.g. "Tips
+// & Tricks") etc. These are Docsy's defaults.
+.td-content .alert {
+  border-left-width: 4px;
+  border-radius: 0.4rem;
+}
+
+// `info` uses a darker teal than Docsy's #c0e0de (whose title was illegible on
+// its own tint); same family, just readable. primary/secondary keep Docsy's.
+@each $name, $c in ("primary": #30638e, "secondary": #ffa630, "info": #357a72) {
+  .td-content .alert-#{$name} {
+    background-color: tint-color($c, 80%);
+    border-color: $c;
+
+    .alert-heading {
+      color: $c;
+    }
+  }
+}
+
+// Print.
+// On screen we centre the docs column (ctfer-container) and cap prose to a
+// readable measure. Ctrl+P on a normal page keeps the screen CSS, so those
+// constraints (plus Bootstrap's `col-md-9` grid track left behind by the hidden
+// `.d-print-none` sidebars) squeeze the content onto a narrow, off-centre strip
+// that wastes most of the sheet. Release all of it for print so the content
+// spans the full page width. (Docsy already hides the sidebars for us.)
+@media print {
+  // Drop the centred max-width envelope and side padding.
+  .td-main {
+    max-width: none !important;
+    padding-inline: 0 !important;
+  }
+
+  // Zero the row gutter so the hidden columns leave no track and `main` has no
+  // residual gutter padding to offset.
+  .td-main > .row {
+    --bs-gutter-x: 0 !important;
+  }
+
+  // Let `main` take the whole row regardless of col-md-9 / col-xl-8, and drop the
+  // ps-md-5 reading indent.
+  .td-main > .row > main {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-inline: 0 !important;
+  }
+
+  // Release the readability measure: every block that caps at var(--ctfer-measure)
+  // (prose, code, tables, cards, tabs) becomes max-width:none and fills the page.
+  .td-content {
+    --ctfer-measure: none;
+  }
+}
