@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@tailwindcss/cli": "^4.0.0",
+    "@tailwindcss/cli": "^4.1.16",
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
@@ -8,7 +8,7 @@
     "prettier": "^3.0.3",
     "prettier-plugin-go-template": "^0.0.15",
     "prettier-plugin-tailwindcss": "^0.5.6",
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.1.16"
   },
   "dependencies": {
     "package.json": "^2.0.1"

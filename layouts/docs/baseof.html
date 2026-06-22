@@ -1,0 +1,45 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage"
+    {{- with .Site.Language.LanguageDirection }} dir="{{ . }}" {{- end -}}
+    {{ with .Site.Language.Lang }} lang="{{ . }}" {{- end }} {{/**/ -}}
+    class="no-js">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="td-{{ .Kind }}{{ with .Page.Params.body_class }} {{ . }}{{ end }}">
+    {{/* The header partial (shared/header.html) now owns its own <header>, so we
+         call it directly with no extra wrapper, exactly like the homepage
+         baseof. This keeps the chrome's container context identical across both
+         layouts. (Docsy's stock baseof wraps this in its own <header>.) */}}
+    {{ partial "navbar.html" . }}
+
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            {{ partial "sidebar.html" . }}
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            {{ partial "page-meta-links.html" . }}
+            {{ partial "toc.html" . }}
+            {{ partial "taxonomy_terms_clouds.html" . }}
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            {{ partial "version-banner.html" . }}
+            {{ if not (.Param "ui.breadcrumb_disable") -}}
+              {{ partial "breadcrumb.html" . -}}
+            {{ end -}}
+            {{ block "main" . }}{{ end }}
+          </main>
+        </div>
+      </div>
+    </div>
+
+    {{/* Footer outside .td-outer (a sibling of the content envelope, like the
+         homepage) so it spans full width and its .container centres identically
+         on both layouts. (Docsy's stock baseof nests it inside .td-outer.) */}}
+    {{ partial "footer.html" . }}
+
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

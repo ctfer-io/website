@@ -1,0 +1,62 @@
+/*
+  Tailwind build for Docsy (docs/blog) pages: theme tokens + utilities only.
+  Preflight (the global reset) is intentionally NOT loaded so it cannot reset
+  Docsy's Bootstrap content. Instead we re-apply, scoped to the house chrome
+  only, the few Preflight rules the header/footer depend on. These live in the
+  `base` layer so utilities (text-primary, mb-2, ...) keep winning the cascade.
+*/
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/*
+  The split import above (used to drop Preflight) does NOT carry the automatic
+  source detection that the full `@import "tailwindcss"` in styles.css provides.
+  Without it Tailwind has nothing to scan, so the chrome's responsive utilities
+  that appear ONLY in the partials (xl:text-start, xl:items-start, xl:flex-row)
+  are never generated, and the footer falls back to its centred mobile layout.
+  Point Tailwind at the layouts so every header/footer class is emitted, exactly
+  like the homepage build. (Path is relative to this file.)
+*/
+@source '../../layouts';
+
+@theme {
+  --color-primary: {{ (default "#b43c2c" site.Params.colors.primary) }};
+  --color-secondary: {{ (default "#ebb850" site.Params.colors.secondary) }};
+  --color-tertiary: {{ (default "#dcf0ff" site.Params.colors.tertiary) }};
+}
+
+@layer base {
+  header nav,
+  footer {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* No bullets/indent on the nav and footer menus. */
+  header nav ul,
+  footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Links carry colour via utilities, not browser underlines. */
+  header nav a,
+  footer a {
+    text-decoration: none;
+  }
+
+  /* Drop UA margins; spacing comes from utilities (mb-2, ...). */
+  header nav :where(h1, h2, h3, h4, h5, h6, p),
+  footer :where(h1, h2, h3, h4, h5, h6, p) {
+    margin: 0;
+  }
+
+  /* Bare toggle button for the mobile menu. */
+  header nav button {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+}
